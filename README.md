@@ -1,2 +1,2 @@
-# client-c-
+# client-c
 C# client for QvaPay API
