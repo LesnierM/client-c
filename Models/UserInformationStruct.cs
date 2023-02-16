@@ -1,5 +1,8 @@
 ﻿namespace QvaPay.SDK.Models
 {
+	/// <summary>
+	/// The user information data.
+	/// </summary>
 	public struct UserInformationStruct
 	{
 		public string Uuid;
