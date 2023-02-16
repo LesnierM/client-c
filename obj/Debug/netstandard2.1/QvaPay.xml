@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QvaPay</name>
+    </assembly>
+    <members>
+        <member name="F:QvaPay.SDK.Enums.Categories.Auth">
+            <summary>
+            Login endpoints.
+            </summary>
+        </member>
+        <member name="F:QvaPay.SDK.Enums.Endpoints.AuthEndpoints.Login">
+            <summary>
+            login with the necessary parameter.
+            </summary>
+        </member>
+        <member name="M:QvaPay.SDK.MethodExtensions.EnumExtensions.ToUrlString(System.Enum)">
+            <summary>
+            Returns the url version of the enum value.Ex(Auth=auth);
+            </summary>
+        </member>
+        <member name="T:QvaPay.SDK.Models.ErrorStruct">
+            <summary>
+            Used to parse error reponse messages from api.
+            </summary>
+        </member>
+        <member name="F:QvaPay.SDK.QvaPaySDK.API_DOMAIN">
+            <summary>
+            Api domain of the endpoints.
+            </summary>
+        </member>
+        <member name="M:QvaPay.SDK.QvaPaySDK.Login(System.String,System.String)">
+            <summary>
+            Logins into the platform and save the session token for future api calls.
+            </summary>
+            <param name="email">Email adress of user account.</param>
+            <param name="password">Passsword of the user account.</param>
+        </member>
+        <member name="M:QvaPay.SDK.QvaPaySDK.getClient``1(QvaPay.SDK.Enums.Categories,``0)">
+            <summary>
+            Creates a new httpclient and populate it with the endpoint and parameters.
+            </summary>
+            <typeparam name="T">An endpoint enum.</typeparam>
+            <param name="category">The category of the endpoint.</param>
+            <param name="endpoint">The endpoint to call.</param>
+        </member>
+        <member name="T:QvaPay.SDK.Validator.Models.ValidationStruct">
+            <summary>
+            The response data of validator.
+            </summary>
+        </member>
+        <member name="F:QvaPay.SDK.Validator.Models.ValidationStruct.IsValid">
+            <summary>
+            Is the data validated?
+            </summary>
+        </member>
+        <member name="F:QvaPay.SDK.Validator.Models.ValidationStruct.Error">
+            <summary>
+            In case of errors here is the cause.
+            </summary>
+        </member>
+        <member name="T:QvaPay.SDK.Validator.Validator">
+            <summary>
+            Used to validate data.
+            </summary>
+        </member>
+        <member name="M:QvaPay.SDK.Validator.Validator.ValidateEmail(System.String)">
+            <summary>
+            Validates email addresses.
+            Validations:
+            Can't be an empty string.
+            Must contain @.
+            Must end .com.
+            Can't end @.com.
+            </summary>
+            <param name="email">The email to validate.</param>
+        </member>
+        <member name="M:QvaPay.SDK.Validator.Validator.ValidateString(System.String)">
+            <summary>
+            Validates strings.
+            Validations:
+            Can't be an empty string.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QvaPay.SDK.Validator.Validator.validate">
+            <summary>
+            Define if the struct is valid or not
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,12 @@
+C:\QvaPaySDK\client-c\bin\Debug\netstandard2.1\QvaPay.deps.json
+C:\QvaPaySDK\client-c\bin\Debug\netstandard2.1\QvaPay.dll
+C:\QvaPaySDK\client-c\bin\Debug\netstandard2.1\QvaPay.pdb
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.csproj.AssemblyReference.cache
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.GeneratedMSBuildEditorConfig.editorconfig
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.AssemblyInfoInputs.cache
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.AssemblyInfo.cs
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.csproj.CoreCompileInputs.cache
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.dll
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.pdb
+C:\QvaPaySDK\client-c\bin\Debug\netstandard2.1\QvaPay.xml
+C:\QvaPaySDK\client-c\obj\Debug\netstandard2.1\QvaPay.xml
