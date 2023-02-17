@@ -136,7 +136,7 @@ namespace QvaPay.SDK
             _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(REQUEST_HEADER_ACCEPT));
 
             if (useAuthentication)
-            lient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", $"<{_loginResult.AccessToken}>");
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _loginResult.AccessToken);
             //_client.DefaultRequestHeaders.Add("Token",$"<{_loginResult.AccessToken}>");
 
             return _client;
