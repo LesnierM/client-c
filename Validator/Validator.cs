@@ -1,4 +1,5 @@
-﻿using QvaPay.SDK.Validator.Models;
+﻿using QvaPay.SDK.Validator.Enums;
+using QvaPay.SDK.Validator.Models;
 
 namespace QvaPay.SDK.Validator
 {
@@ -7,52 +8,79 @@ namespace QvaPay.SDK.Validator
 	/// </summary>
 	public static class Validator
 	{
-		static ValidationStruct _validationResult;
+		static ValidationStructResult _validationResult;
+		
 		/// <summary>
-		/// Validates email addresses.
-		/// Validations:
-		/// Can't be an empty string.
-		/// Must contain @.
-		/// Must end .com.
-		/// Can't end @.com.
+		/// Validates a string acording to the provided validation types.
 		/// </summary>
-		/// <param name="email">The email to validate.</param>
-		public static ValidationStruct ValidateEmail(string email)
+		/// <param name="value">The string to validate.</param>
+		/// <param name="validationTypes">The type of validations to use.</param>
+		/// <returns></returns>
+		public static ValidationStructResult ValidateString(string value, ValidationTypeStruct[] validationTypes)
 		{
-			_validationResult = new ValidationStruct();
-			//make lowercase for validations
-			email=email.ToLower();
+			_validationResult = new ValidationStructResult();
+
+			//to avoid case issues
+			value = value.ToLower();
 
 			//validations
-			if (email.Length == 0)
-				_validationResult.Error = "Email can't be null or empty";
-			else if (!email.Contains("@") || !email.EndsWith(".com")||email.Contains("@.com"))
-				_validationResult.Error = "Invalid email";
+			foreach (var validation in validationTypes)
+			{
+				//to avoid case issues
+				string _validationParameterLowecase =validation.Parameter!=null?validation.Parameter.ToLower():"";
 
+				if (_validationResult.Error != null && _validationResult.Error.Length != 0)
+					break;
+
+				switch (validation.Type)
+				{
+					case ValidationTypes.Required:
+						if (string.IsNullOrEmpty(value))
+							_validationResult.Error = "&field can't be empty or null.";
+						break;
+					case ValidationTypes.CharacterLimit:
+						int _parameter = default;
+						if (!int.TryParse(_validationParameterLowecase, out _parameter))
+						{
+							_validationResult.Error = "Wrong validation parameter.Expected an integer.";
+							break;
+						}
+						if (value.Length < _parameter)
+							_validationResult.Error = $"&field1 must be {_parameter} characters length.";
+						break;
+					case ValidationTypes.Equals:
+						if (!value.Equals(_validationParameterLowecase))
+							_validationResult.Error = "&field1 and &field2 must match.";
+						break;
+					case ValidationTypes.Contain:
+						if (!value.Contains(_validationParameterLowecase))
+							_validationResult.Error = $"&field1 must contain '{_validationParameterLowecase}'.";
+						break;
+					case ValidationTypes.MustEnd:
+						if (!value.EndsWith(_validationParameterLowecase))
+							_validationResult.Error = $"&field1 must end '{_validationParameterLowecase}'.";
+						break;
+					case ValidationTypes.MustNotEnd:
+						if (value.EndsWith(_validationParameterLowecase))
+							_validationResult.Error = $"&field1 must not end '{_validationParameterLowecase}'.";
+						break;
+					case ValidationTypes.MustNotContain:
+						if (value.Contains(_validationParameterLowecase))
+							_validationResult.Error = $"&field1 must not contain '{_validationParameterLowecase}'.";
+						break;
+					case ValidationTypes.StartWith:
+						if (!value.StartsWith(_validationParameterLowecase))
+							_validationResult.Error = $"&field1 must start with '{_validationParameterLowecase}'";
+						break;
+				}
+			}
 
 			return validate();
 		}
-		/// <summary>
-		/// Validates strings.
-		/// Validations:
-		/// Can't be an empty string.
-		/// </summary>
-		/// <param name="value"></param>
-		/// <returns></returns>
-		public static ValidationStruct ValidateString(string value)
-		{
-			_validationResult = new ValidationStruct();
-
-			if (string.IsNullOrEmpty(value))
-				_validationResult.Error = "Field can't be empty";
-
-			return validate();
-		}
-
 		/// <summary>
 		/// Define if the struct is valid or not
 		/// </summary>
-		static ValidationStruct validate()
+		static ValidationStructResult validate()
 		{
 			var _result = _validationResult;
 

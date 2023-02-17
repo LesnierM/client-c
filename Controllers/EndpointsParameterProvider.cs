@@ -2,6 +2,7 @@
 using QvaPay.SDK.Enums.Endpoints;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace QvaPay.SDK.Controllers
@@ -18,7 +19,7 @@ namespace QvaPay.SDK.Controllers
 		/// <typeparam name="T">An endpoint enum.</typeparam>
 		/// <param name="category">The category.</param>
 		/// <param name="endpoint">The endpoint.</param>
-		/// <param name="parameters">The parameters to replance in the template in the same oprder.</param>
+		/// <param name="parameters">The parameters to replance in the template in the same order.</param>
 		/// <returns></returns>
         public static string GetParameters<T>(Categories category, T endpoint, string[] parameters) where T : Enum
         {
@@ -60,6 +61,6 @@ namespace QvaPay.SDK.Controllers
                 _result = _result.Replace("@param" + (i+1), parameters[i]);
 
             return _result;
-		}
+		}	
 	}
 }

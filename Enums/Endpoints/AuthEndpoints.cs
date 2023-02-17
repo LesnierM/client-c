@@ -10,7 +10,13 @@ namespace QvaPay.SDK.Enums.Endpoints
         /// Login with the necessary parameter.
         /// </summary>
         Login,
+        /// <summary>
+        /// Register a new user.
+        /// </summary>
         Register,
+        /// <summary>
+        /// Logout the aunthenticated user.
+        /// </summary>
         Logout
     }
 }
