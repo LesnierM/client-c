@@ -11,7 +11,10 @@ namespace QvaPay.SDK.MethodExtensions
 		/// </summary>
 		public static string ToUrlString(this Enum s)
 		{
-			return s.ToString().ToLower();
+			//If it is empty means that it doesnt need another level in url
+			if (s.ToString().Equals("Empty"))
+				return "";
+			return  s.ToString().ToLower();
 		}
 	}
 }

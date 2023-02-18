@@ -10,6 +10,9 @@ namespace QvaPay.SDK.Enums
 		/// Login endpoints.
 		/// </summary>
 		Auth,
+		/// <summary>
+		/// User endpoints.
+		/// </summary>
 		User,
 		Transactions,
 		Merchants,

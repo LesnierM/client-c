@@ -41,9 +41,14 @@
             Login endpoints.
             </summary>
         </member>
+        <member name="F:QvaPay.SDK.Enums.Categories.User">
+            <summary>
+            User endpoints.
+            </summary>
+        </member>
         <member name="F:QvaPay.SDK.Enums.Endpoints.AuthEndpoints.Login">
             <summary>
-            Login with the necessary parameter.
+            Logsin with the necessary parameter.
             </summary>
         </member>
         <member name="F:QvaPay.SDK.Enums.Endpoints.AuthEndpoints.Register">
@@ -53,7 +58,12 @@
         </member>
         <member name="F:QvaPay.SDK.Enums.Endpoints.AuthEndpoints.Logout">
             <summary>
-            Logout the aunthenticated user.
+            Logsout the aunthenticated user.
+            </summary>
+        </member>
+        <member name="F:QvaPay.SDK.Enums.Endpoints.UserEndpoints.Empty">
+            <summary>
+            Gets the logged in user information.
             </summary>
         </member>
         <member name="M:QvaPay.SDK.MethodExtensions.EnumExtensions.ToUrlString(System.Enum)">
@@ -113,6 +123,11 @@
         <member name="M:QvaPay.SDK.QvaPaySDK.Logout">
             <summary>
             Logout the aunthenticated user.
+            </summary>
+        </member>
+        <member name="M:QvaPay.SDK.QvaPaySDK.GetUserInfo">
+            <summary>
+            Get User Information.
             </summary>
         </member>
         <member name="M:QvaPay.SDK.QvaPaySDK.createStringContent(System.String)">

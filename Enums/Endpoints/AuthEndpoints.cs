@@ -7,7 +7,7 @@ namespace QvaPay.SDK.Enums.Endpoints
     internal enum AuthEndpoints
     {
         /// <summary>
-        /// Login with the necessary parameter.
+        /// Logsin with the necessary parameter.
         /// </summary>
         Login,
         /// <summary>
@@ -15,7 +15,7 @@ namespace QvaPay.SDK.Enums.Endpoints
         /// </summary>
         Register,
         /// <summary>
-        /// Logout the aunthenticated user.
+        /// Logsout the aunthenticated user.
         /// </summary>
         Logout
     }

@@ -23,6 +23,7 @@ namespace QvaPay.SDK
         public event ParameterlessEventHandler OnLogin;
         public event ParameterlessEventHandler OnRegister;
         public event ParameterlessEventHandler OnLogout;
+        public event ParameterlessEventHandler OnUserInfoRetrieved;
         public event ErrorEventHandler OnError;
         #endregion
 
@@ -81,10 +82,11 @@ namespace QvaPay.SDK
 
 			if (_response.IsSuccessStatusCode)
 			{
-				_loginResult = JsonConvert.DeserializeObject<LoginResultStruct>(_responseString);
+                //reset last logged in user
+                _loginResult = new LoginResultStruct();
 
-				if (OnLogin != null)
-					OnLogin();
+				if (OnRegister != null)
+					OnRegister();
 			}
 			else if (OnError != null)
 				OnError(ErrorProvider.ParseError(_responseString,Categories.Auth,AuthEndpoints.Register));
@@ -94,7 +96,34 @@ namespace QvaPay.SDK
         /// </summary>
         public async void Logout()
         {
+            //Ensure is logged in before loggin out
+            if(_loginResult.AccessToken==null)
+            {
+                if (OnError != null)
+                    OnError(new ErrorStruct(new string[] { "First log in." }));
+                return;
+            }
+
             var _client = getClient(Categories.Auth, AuthEndpoints.Logout,true);
+
+			var _response = await _client.GetAsync(_client.BaseAddress);
+
+			var _responseString = await _response.Content.ReadAsStringAsync();
+
+			if (_response.IsSuccessStatusCode)
+			{
+				if (OnLogout != null)
+					OnLogout();
+			}
+			else if (OnError != null)
+				OnError(ErrorProvider.ParseError(_responseString,Categories.Auth,AuthEndpoints.Logout));
+		}
+        /// <summary>
+        /// Get User Information.
+        /// </summary>
+		public async void GetUserInfo()
+		{
+			var _client = getClient(Categories.User, UserEndpoints.Empty, true);
 
 			var _response = await _client.GetAsync(_client.BaseAddress);
 
@@ -104,20 +133,20 @@ namespace QvaPay.SDK
 			{
 				_loginResult = JsonConvert.DeserializeObject<LoginResultStruct>(_responseString);
 
-				if (OnLogout != null)
-					OnLogout();
+				if (OnUserInfoRetrieved != null)
+					OnUserInfoRetrieved();
 			}
 			else if (OnError != null)
-				OnError(ErrorProvider.ParseError(_responseString,Categories.Auth,AuthEndpoints.Logout));
+				OnError(ErrorProvider.ParseError(_responseString, Categories.Auth, AuthEndpoints.Logout));
 		}
-        #endregion
+		#endregion
 
-        #region Methods
-        /// <summary>
-        /// Creates the body of the request with the provided json.
-        /// </summary>
-        /// <param name="json">The body in json format</param>
-        StringContent createStringContent(string json)
+		#region Methods
+		/// <summary>
+		/// Creates the body of the request with the provided json.
+		/// </summary>
+		/// <param name="json">The body in json format</param>
+		StringContent createStringContent(string json)
         {
             return new StringContent(json, Encoding.UTF8, REQUEST_HEADER_ACCEPT);
 		}
